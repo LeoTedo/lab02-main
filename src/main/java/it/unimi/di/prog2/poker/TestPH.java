@@ -7,6 +7,8 @@ public class TestPH {
 	public static void main(String[] args) {
 		Deck d = new Deck();
 		PokerHand p = new PokerHand(d, 5);
+
+		System.out.println(p);
 		//System.out.println(p.GetRank());
 		//System.out.println(d.draw());
 

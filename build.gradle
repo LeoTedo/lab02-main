@@ -18,7 +18,7 @@ dependencies {
 }
 
 application {
-    mainClassName = 'ca.mcgill.cs.stg.solitaire.gui.Solitaire'
+    mainClassName = 'it.unimi.di.prog2.poker.TestPH'
 }
 
 test {

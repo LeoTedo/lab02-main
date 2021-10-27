@@ -6,7 +6,12 @@ import ca.mcgill.cs.stg.solitaire.cards.Deck;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class PokerHand {
+public class PokerHand implements Iterable<Card>{
+	@Override
+	public Iterator iterator() {
+		return Arrays.stream(mano).
+	}
+
 	enum HandRank {
 		HIGH_CARD, ONE_PAIR, TWO_PAIR, TRIS, STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_A_KIND, STRAIGHT_FLUSH
 	};
@@ -19,31 +24,27 @@ public class PokerHand {
 		for (int i = 0; i < numCards && !deck.isEmpty(); i++) {
 			mano[i] = deck.draw();
 		}
+
 	}
 
 	@Override
 	public String toString() {
-		return "PokerHand{" +
-				"mano=" + Arrays.toString(mano) +
-				'}';
+		return "mano: " + Arrays.toString(mano);
 	}
 
-	public void GetRank() {
-
-		deck.shuffle();
-		Iterator<Deck> it = deck.iterator();
-		it.next();
-		/*for (int i = 0; i < 5; i++) {
-			mano[i] = deck.draw();
-			System.out.println(mano[i]);
-		}
-		for (int i = 0; i < mano.length; i++) {
-if (mano[i].getSuit() == mano[i+1].getSuit()){
-
-}*/
-		}
-
-		/**/
+	public HandRank GetRank() {
+		//PUOI CREARE INTERFACCIA CON IL CONTROLLO DI TUTTE I TIPI DI MANI, POI IMPORTARLA QUI
+		if (ScalaReale()){
+			return HandRank.STRAIGHT_FLUSH;
+		} else
+		if (Scala()){
+			return HandRank.STRAIGHT
+		} else
+		if (Full()){
+			return HandRank.FULL_HOUSE;
+		} else
+		return HandRank.HIGH_CARD;
+	}
 		
 	}
-}
+
