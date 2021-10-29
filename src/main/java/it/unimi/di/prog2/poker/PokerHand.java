@@ -6,17 +6,18 @@ import ca.mcgill.cs.stg.solitaire.cards.Deck;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class PokerHand implements Iterable<Card>{
+public class PokerHand implements Iterable<Card>, Valutatore{
 	@Override
 	public Iterator iterator() {
-		return Arrays.stream(mano).
+		return Arrays.stream(mano).iterator();
 	}
 
 	enum HandRank {
 		HIGH_CARD, ONE_PAIR, TWO_PAIR, TRIS, STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_A_KIND, STRAIGHT_FLUSH
 	};
 	Deck deck = new Deck();
-	private Card[] mano;
+	public Card[] mano;
+	//Valutatore v = new Valutatore()
 
 
 	public PokerHand(Deck deck, int numCards) {
@@ -34,16 +35,8 @@ public class PokerHand implements Iterable<Card>{
 
 	public HandRank GetRank() {
 		//PUOI CREARE INTERFACCIA CON IL CONTROLLO DI TUTTE I TIPI DI MANI, POI IMPORTARLA QUI
-		if (ScalaReale()){
-			return HandRank.STRAIGHT_FLUSH;
-		} else
-		if (Scala()){
-			return HandRank.STRAIGHT
-		} else
-		if (Full()){
-			return HandRank.FULL_HOUSE;
-		} else
-		return HandRank.HIGH_CARD;
+		Valutatore evaluator = new FlushValuator (new HighRankEvaluator());
+	return evaluator.evaluate(this);
 	}
 		
 	}
