@@ -1,22 +1,28 @@
 package it.unimi.di.prog2.poker;
 
+import ca.mcgill.cs.stg.solitaire.cards.Card;
 import ca.mcgill.cs.stg.solitaire.cards.Suit;
 
 import java.util.Arrays;
 
 public class FlushValuator implements Valutatore {
+    private final Valutatore next;
     public FlushValuator(Valutatore nextEvaluator) {
+        assert nextEvaluator != null;
+        next = nextEvaluator;
     }
 
     @Override
     public PokerHand.HandRank evaluate(PokerHand p) {
-       // Suit suit = p.mano[0].getSuit();
-        for (int i = 0; i < p.mano.length; i++) {
-            if (p.mano[i].getSuit() != p.mano[i+1].getSuit()){
-                return nextEvaluator.evaluate(p);
-            }
-        }
-
+       assert p != null;
+       Suit suit = null;
+       for (Card card : p){
+           if (suit == null){
+               suit = card.getSuit();
+           } else if (suit != card.getSuit()){
+               return next.evaluate(p);
+           }
+       }
         return PokerHand.HandRank.FLUSH;
     }
 }
